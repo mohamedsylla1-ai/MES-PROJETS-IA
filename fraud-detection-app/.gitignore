@@ -1,0 +1,8 @@
+runtime.txt
+*.pkl
+__pycache__/
+*.pyc
+.env
+.DS_Store
+.vscode/
+*.log

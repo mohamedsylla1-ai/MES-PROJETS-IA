@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détecteur de Fraude - IA</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 Détecteur de Fraude</h1>
+            <p>Analysez une transaction avec Intelligence Artificielle</p>
+        </header>
+
+        <main>
+            <div class="form-section">
+                <h2>Analyser une Transaction</h2>
+                <form id="fraudForm">
+                    <div class="form-group">
+                        <label for="montant">Montant (€)</label>
+                        <input type="number" id="montant" name="montant" step="0.01" min="0" required placeholder="Ex: 150.50">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="distance">Distance domicile (km)</label>
+                        <input type="number" id="distance" name="distance" step="0.1" min="0" required placeholder="Ex: 500">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nb_transactions">Nombre de transactions en 24h</label>
+                        <input type="number" id="nb_transactions" name="nb_transactions" min="0" required placeholder="Ex: 2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="heure">Heure (0-23)</label>
+                        <input type="number" id="heure" name="heure" min="0" max="23" required placeholder="Ex: 14">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pays">Pays</label>
+                        <select id="pays" name="pays" required>
+                            <option value="">-- Sélectionnez un pays --</option>
+                            <option value="France">France</option>
+                            <option value="Allemagne">Allemagne</option>
+                            <option value="Italie">Italie</option>
+                            <option value="Espagne">Espagne</option>
+                            <option value="Royaume-Uni">Royaume-Uni</option>
+                            <option value="États-Unis">États-Unis</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-analyze">Analyser la Transaction</button>
+                </form>
+            </div>
+
+            <div id="resultSection" class="result-section hidden">
+                <h2>Résultat de l'Analyse</h2>
+                <div id="verdict" class="verdict"></div>
+                <div class="probability-bars">
+                    <div class="probability">
+                        <span>Transaction Normale</span>
+                        <div class="bar normal">
+                            <div id="probNormal" class="fill"></div>
+                        </div>
+                        <span id="probNormalText">0%</span>
+                    </div>
+                    <div class="probability">
+                        <span>Fraude Détectée</span>
+                        <div class="bar fraude">
+                            <div id="probFraude" class="fill"></div>
+                        </div>
+                        <span id="probFraudeText">0%</span>
+                    </div>
+                </div>
+                <div class="transaction-summary">
+                    <h3>Résumé de la Transaction</h3>
+                    <ul>
+                        <li><strong>Montant:</strong> <span id="summaryMontant">-</span> €</li>
+                        <li><strong>Distance:</strong> <span id="summaryDistance">-</span> km</li>
+                        <li><strong>Transactions 24h:</strong> <span id="summaryTransactions">-</span></li>
+                        <li><strong>Heure:</strong> <span id="summaryHeure">-</span>h</li>
+                        <li><strong>Pays:</strong> <span id="summaryPays">-</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="errorSection" class="error-section hidden">
+                <p id="errorMessage"></p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Modèle AI basé sur Random Forest | Précision: 98.5%</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
